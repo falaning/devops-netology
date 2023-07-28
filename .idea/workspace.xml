@@ -1,14 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6cf5459e-2720-4a2b-9c08-481167c8a097" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/homeworks/1_GIT-DEV-33/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/homeworks/1_GIT-DEV-33/jsonnet.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/homeworks/1_GIT-DEV-33/md.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/homeworks/1_GIT-DEV-33/modules.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/homeworks/1_GIT-DEV-33/sh.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/homeworks/1_GIT-DEV-33/tf.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/homeworks/1_GIT-DEV-33/yaml.png" afterDir="false" />
+    <list default="true" id="6cf5459e-2720-4a2b-9c08-481167c8a097" name="Changes" comment="Completed task 1 (improved list)">
+      <change beforePath="$PROJECT_DIR$/homeworks/1_GIT-DEV-33/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/homeworks/1_GIT-DEV-33/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,6 +23,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="TF_FMT" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -40,6 +35,28 @@
       <option name="presentableId" value="Default" />
       <updated>1690548983916</updated>
     </task>
+    <task id="LOCAL-00001" summary="Completed task 1">
+      <created>1690557017410</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1690557017410</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Completed task 1 (improved list)">
+      <created>1690584147019</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1690584147019</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Completed task 1 (improved list)">
+      <created>1690584182601</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1690584182601</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -52,5 +69,11 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Completed task 1" />
+    <MESSAGE value="Completed task 1 (list improvement)" />
+    <MESSAGE value="Completed task 1 (improved list)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Completed task 1 (improved list)" />
   </component>
 </project>
