@@ -13,3 +13,5 @@ Just homeworks :)
 | August 2, 2023 | 02-git-01-vcs |
 |                |               |
 
+### This is a NEW LINE (for task "02-git-02-base")
+
