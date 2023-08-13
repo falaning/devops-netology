@@ -7,9 +7,10 @@ Just homeworks :)
 
 ### i've done at this moment:
 
-| Date           |          Homeworks          |
-|----------------|:---------------------------:|
-| July 29,  2023 |         1_GIT-DEV-33        |
-| August 2, 2023 |        02-git-01-vcs        |
-| August 9, 2023 |     02-git-03-branching     |
+| Date           |      Homeworks      |
+|----------------|:-------------------:|
+| July 29,  2023 |    1_GIT-DEV-33     |
+| August 2, 2023 |    02-git-01-vcs    |
+| August 9, 2023 | 02-git-03-branching |
+| August 13,2023 |  02-git-04-tools    |
 
