@@ -1,0 +1,8 @@
+#cloud-config
+users:
+  - name: boriscernyj
+    groups: sudo
+    shell: /bin/bash
+    sudo: "ALL=(ALL) NOPASSWD:ALL"
+    ssh-authorized-keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDEzE7TbV5irENNmmnbO9Sjytg9Cs1G6AKHqxNFmIy0QWSh4O3R6n029TGZVZdHsW5RG6DAVhyTHT/kk4zC6YJGIkBPv1Hrw6ztHk8gFuPYFX9VRqPLIEawV8uuE/Uy10lR6B7L/YTiau8xa07Z6Bg6cpZb1Bv6+9V/hQoOIAhiBKc/FvbqMnIoCH1i1BmSmyYfYX+EAoxXWnOxdIjP+m4VUdMq6okGlxKEBfneU9C+LAsTz72evJNZEssU6uPn7nIJ2EY4utqW33IswKURxPzkSOwo98efu4OJ1Ody/883Gq5/DANkdKv9yaPEI3wQ24TLgJDeX96LdfVtS+MdsRvKYyM6BwHNH4/ZgcqO/leC59TV1qASMYZ/7SJeUN0LbpoNPnmKg63MpeBuN4lrwE22VvzMlK5cCDvcXSQ0vmtUCe9Sj4AgkJ8s75e6znzZmKLi/ALnt7uFxh72J7Cn+Bksgtroki7zsOML/j1QgZ11eUWptRNvB7Q2l8cx2mhl4DM= boriscernyj@MacBook-Air-Boris.local
