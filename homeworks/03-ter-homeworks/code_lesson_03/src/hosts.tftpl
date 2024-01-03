@@ -1,0 +1,15 @@
+[webservers]
+%{ for i in webservers ~}
+${i["name"]} ansible_host=${i["network_interface"][0]["nat_ip_address"]} fqdn=${i["fqdn"]}
+%{ endfor ~}
+
+[dbservers]
+%{ for x in dbservers ~}
+${x["name"]}   ansible_host=${x["network_interface"][0]["nat_ip_address"]} fqdn=${x["fqdn"]}
+%{ endfor ~}
+
+[storageservers]
+%{ for y in storageservers ~}
+${y["name"]}   ansible_host=${y["network_interface"][0]["nat_ip_address"]} fqdn=${y["fqdn"]}
+%{ endfor ~}
+
