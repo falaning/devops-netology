@@ -1,0 +1,10 @@
+# vector.toml.j2
+[sources.in]
+  type = "file"
+  include = ["/var/log/nginx/access.log"]
+  ignore_older = 86400
+
+[sinks.out]
+  inputs = ["in"]
+  type = "console"
+  encoding = "json"
