@@ -1,0 +1,9 @@
+---
+clickhouse_version: "21.1.9.41-2"
+clickhouse_packages:
+  - clickhouse-client
+  - clickhouse-server
+  - clickhouse-common-static
+vector_version: "0.20.0"
+lighthouse_vcs: "https://github.com/VKCOM/lighthouse.git"
+Lighthouse_location_dir: "/home/user/lighthouse"
