@@ -1,0 +1,34 @@
+pipeline {
+    agent any  // Это указывает Jenkins использовать любой доступный агент для выполнения пайплайна
+
+    environment {
+        ANSIBLE_HOST_KEY_CHECKING = "False"
+    }
+    
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm  // Это подразумевает, что Jenkins вытянет последний код из SCM, который указан в настройках Job
+            }
+        }
+
+        stage('Run Ansible Playbook') {
+            steps {
+                script {
+                    // Запуск ansible-playbook без флагов --check и --diff
+                    sh 'ansible-playbook -i inventory/hosts playbook.yml'
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Playbook выполнен успешно!'
+        }
+        failure {
+            echo 'Ошибка выполнения Playbook.'
+        }
+    }
+}
+

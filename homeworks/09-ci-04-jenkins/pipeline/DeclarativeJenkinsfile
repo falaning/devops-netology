@@ -1,0 +1,48 @@
+pipeline {
+    agent any  // Задается агент, на котором будет выполняться пайплайн
+
+    environment {
+        // Установка переменной MOLECULE_NO_LOG, чтобы не записывать логи (опционально)
+        MOLECULE_NO_LOG = "false"
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                // Клонирование репозитория с GitHub или другого Git-хостинга
+                git 'https://github.com/yourUsername/yourRepository.git'
+            }
+        }
+
+        stage('Setup Python Environment') {
+            steps {
+                // Установка Python3 и необходимых пакетов
+                sh '''
+                sudo apt-get update
+                sudo apt-get install -y python3-pip
+                python3 -m pip install --upgrade pip
+                pip3 install molecule[docker]
+                '''
+            }
+        }
+
+        stage('Run Molecule Test') {
+            steps {
+                // Запуск molecule test на уровне роли
+                dir('path/to/your/ansible/role') {
+                    sh 'molecule test'
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Molecule tests executed successfully.'
+        }
+        failure {
+            echo 'Molecule tests failed.'
+            // Здесь можно добавить дополнительные действия в случае неудачи
+        }
+    }
+}
