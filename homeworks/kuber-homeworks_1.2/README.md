@@ -70,3 +70,7 @@ spec:
 4) Подключился к Service с помощью метода изменения типа сервиса на `NodePort` (вместо port-forward) для того чтобы получить доступ к странице через браузер:
 
 ![web_2.png](screenshots/web_2.png)
+
+Список pods:
+
+![get_pods.png](screenshots/get_pods.png)
