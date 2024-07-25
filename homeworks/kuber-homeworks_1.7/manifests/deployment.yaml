@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: busy-multi-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: busy-multi-app
+  template:
+    metadata:
+      labels:
+        app: busy-multi-app
+    spec:
+      containers:
+      - name: busybox
+        image: busybox
+        command: [ "/bin/sh", "-c", "while true; do echo 'hello' >> /data/hello.txt; sleep 5; done" ]
+        volumeMounts:
+          - mountPath: /data
+            name: shared-data
+      - name: multitool
+        image: praqma/network-multitool
+        command: [ "/bin/sh", "-c", "while true; do cat /data/hello.txt; sleep 5; done" ]
+        volumeMounts:
+          - mountPath: /data
+            name: shared-data
+      volumes:
+      - name: shared-data
+        persistentVolumeClaim:
+          claimName: my-local-pvc
