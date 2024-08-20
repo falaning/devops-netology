@@ -239,3 +239,18 @@ Subnet `public` (192.168.10.0/24) и `private` (192.168.20.0/24):
 -rw-r--r--  1 boriscernyj  staff   222B 15 авг 16:57 outputs.tf
 -rw-r--r--  1 boriscernyj  staff   404B 15 авг 16:57 variables.tf
 ```
+
+##### 6) Правки
+
+1) Убрал у машины **private** подсети публичный адрес:
+
+![instance_2.png](screenshots/instance_2.png)
+
+2) Привязал подсети к таблице маршрутизации, используя атрибут ресурса подсети `route_table_id`:
+
+![rt_new.png](screenshots/rt_new.png)
+
+3) Проверил, всё работает:
+
+![ubuntu_chk_1.png](screenshots/ubuntu_chk_1.png)
+![ubuntu_chk_2.png](screenshots/ubuntu_chk_2.png)
