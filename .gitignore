@@ -8,3 +8,4 @@ homeworks/devops-diplom-yandexcloud/terraform/variables.tf
 homeworks/devops-diplom-yandexcloud/terraform/terraform.tfstate
 homeworks/devops-diplom-yandexcloud/terraform/terraform.tfstate.backup
 homeworks/devops-diplom-yandexcloud/terraform/key.json
+homeworks/devops-diplom-yandexcloud/terraform/variables.tf  
