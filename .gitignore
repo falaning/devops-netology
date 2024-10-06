@@ -2,3 +2,6 @@
 *.DS_Store
 ._*
 .DS_Store
+homeworks/devops-diplom-yandexcloud/terraform/.terraform/
+homeworks/devops-diplom-yandexcloud/terraform/.terraform.lock.hcl
+homeworks/devops-diplom-yandexcloud/terraform/variables.tf  
