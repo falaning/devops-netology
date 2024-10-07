@@ -272,6 +272,10 @@ on:
 
 ![again_2.png](screenshots/again_2.png)
 
+Скриншот успешно отработавшего **workflow**:
+
+![deploy_work.png](screenshots/deploy_work.png)
+
 ###### Какие поборол ошибки
 
 Как и с предыдущим **workflow** (`docker-build-and-push.yml`) пришлось несколько раз переписывать код, перепроводить `jobs`, и добавлять новые сущности.
