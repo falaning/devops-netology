@@ -224,6 +224,8 @@ Error saving credentials: error storing credentials - err: exit status 1, out: `
 
 ![github_workflow.png](screenshots/github_workflow.png)
 
+###### Какие поборол ошибки
+
 Путём проб и ошибок успешно запустил его с 7 раза. Основные проблемы возникали сначала из-за ошибок в `yaml` синтаксе, затем **workflow** стал успешно запускаться но **push** в репозиторий создавал сразу 3 ***"images"*** вместо 1. Оказывается, это было из-за использования утилиты `docker buildx` в **workflow** (расширенной вресии `docker build`). Из-за своей специфики она создаёт во время сборки помимо **image** ещё 2 файла метаданных, которые тоже **push**ились в `container registry` (и соответственно воспринимались им как **images**).
 
 Проблема решилась путём замены `docker buildx` на традиционный `docker build`, после чего **images** стали **push**иться и отображаться корректно.
@@ -235,3 +237,116 @@ Error saving credentials: error storing credentials - err: exit status 1, out: `
 ![cr_2.png](screenshots/cr_2.png)
 
 ##### 2) Сделал автоматический деплой нового docker образа
+
+Для этого я написал **workflow** `/configs/.github/workflows/deploy.yml`:
+
+![deploy_yml.png](screenshots/deploy_yml.png)
+
+Благодаря этой строке кода я настроил так чтобы он срабатывал после `docker-build-and-push.yml`
+
+```
+on:
+  workflow_run:
+    workflows: ["Docker Build and Push"]
+    types:
+     - completed
+```
+
+Для работы этого **workflow** потребовалось создать новый **terraform file** `k8s_service_account.tf` который добавлял **service account** `github-actions-sa` специально для ***github_actions***, выдал ему соответствующие роли и применил изменения при помощи `terraform apply`.
+
+В итоге вот такие секреты нужно было создать для **workflowфs**.
+
+`KUBERNETES_SERVER` - для получения значения надо ввести команду `kubectl cluster-info` и из вывода взять ссылку которая идёт после `Kubernetes control plane is running at`, например `https://123.123.123.123`, затем положить её в этот секрет (т.е. в ***защищённую переменную Github***)
+
+`KUBERNETES_TOKEN` - для его получения надо ввести команду `kubectl create token github-actions-sa -n default`, после чего скопировать длинный токен из вывода и положить в этот секрет.
+
+![something.png](screenshots/something.png)
+
+###### Проверка приложения
+
+Чтобы обновить приложение, я изменил код с `It works!` на `It works! Again :)`
+
+![again.png](screenshots/again.png)
+
+Затем запушил изменения в репозиторий, оба **workflows** (`docker-build-and-push.yml` и `deploy.yml`) отработали правильно, в итоге приложение с новым кодом успешно задеплоилось в k8s кластер и теперь отображается на web-странице по тому-же IP-адресу:
+
+![again_2.png](screenshots/again_2.png)
+
+###### Какие поборол ошибки
+
+Как и с предыдущим **workflow** (`docker-build-and-push.yml`) пришлось несколько раз переписывать код, перепроводить `jobs`, и добавлять новые сущности.
+Например, по-ходу следующих ошибок выяснилось следующее:
+
+Ошибка №1:
+
+```
+E1007 14:16:27.315860    1793 memcache.go:238] couldn't get current server API group list: Get "***/api?timeout=32s": x509: certificate signed by unknown authority
+```
+
+Решилась тем что:
+
+- Добавил параметр `--insecure-skip-tls-verify`
+
+Ошибка №2:
+
+```
+Error from server (Forbidden): deployments.apps "my-nginx-app" is forbidden: User "system:serviceaccount:default:github-actions-sa" cannot get resource "deployments" in API group "apps" in the namespace "default"
+```
+
+Решилась тем что:
+
+- Перезапустил кластер
+
+Ошибка №3:
+
+```
+E1007 14:30:57.374837    1769 memcache.go:238] couldn't get current server API group list: the server has asked for the client to provide credentials
+```
+
+Решилась тем что:
+
+- Обновил секреты `KUBERNETES_TOKEN` и `KUBERNETES_SERVER` (актуально после перезапуска кластера или, особенно, его пересборки)
+
+Ошибка №4:
+
+```
+Error from server (NotFound): deployments.apps "my-nginx-app" not found
+```
+
+Решилась тем что:
+
+- Перезапустил deployment `my-nginx-app`
+
+#### Всё "что необходимое для сдачи задания"
+
+1) Репозиторий с конфигурационными файлами Terraform и готовность продемонстрировать создание всех ресурсов с нуля.
+
+<https://github.com/falaning/devops-netology/tree/main/homeworks/devops-diplom-yandexcloud> - основной репозиторий `devops-netology` с terraform кодом, прочими конфигами и самим дипломным проектом
+<https://github.com/falaning/configs/tree/main> - второй репозиторий `configs` с Dockerfile, k8s манифестами (nginx-приложения и prometheus) html-страницей и nginx.conf
+<https://github.com/falaning/configs/tree/main/.github/workflows> - мои **workflows** (на `configs`)
+
+2) Пример pull request с комментариями созданными atlantis'ом или снимки экрана из Terraform Cloud или вашего CI-CD-terraform pipeline.
+
+- В моём случае был выбран CI-CD, все примеры представленны в этой работе.
+
+3) Репозиторий с конфигурацией ansible, если был выбран способ создания Kubernetes кластера при помощи ansible.
+
+- Был выбран способ создания кластера через **Yandex Managed Service for Kubernetes**
+
+4) Репозиторий с Dockerfile тестового приложения и ссылка на собранный docker image.
+
+- Все репозитории указаны в пунтке (1)
+
+5) Репозиторий с конфигурацией Kubernetes кластера
+
+- Все репозитории указаны в пунтке (1)
+
+6) Ссылка на тестовое приложение и веб интерфейс Grafana с данными доступа.
+
+<http://84.201.146.152/> - тестовове приложение
+<http://localhost:3000/> - так как в задании было указано сделать "Http доступ к web интерфейсу grafana" я решил хостить через localhost,
+так как из-за особенностей платформы `YandexCloud` при динамичном перестроении кластера через **terraform** адреса обновляются, но неймспейсы остаются те-же. При необходимости готов продемонстрировать работу на камеру.
+
+7) Все репозитории рекомендуется хранить на одном ресурсе (github, gitlab)
+
+- Все репозитории хранятся на **github**
